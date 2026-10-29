@@ -21,6 +21,7 @@ os.environ["SSL_CERT_FILE"] = certifi.where()
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 WEATHERSTACK_API_KEY = os.getenv("WEATHERSTACK_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
@@ -79,9 +80,11 @@ def get_weather_data(city: str) -> str:
 # ==========================================
 
 llm = ChatOpenAI(
-    model="gpt-3.5-turbo",
+    model="gpt-6-luna",
     temperature=0,
-    api_key=OPENAI_API_KEY
+    api_key=OPENAI_API_KEY,
+    model_kwargs={"reasoning_effort": "none"},
+    max_retries=2,
 )
 
 # ==========================================
